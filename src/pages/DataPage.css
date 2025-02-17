@@ -1,0 +1,131 @@
+.data-container {
+    max-width: 800px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .data-container h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+  
+  .data-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    margin-bottom: 5px;
+    display: block;
+    color: #2c3e50;
+  }
+  
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+  }
+  
+  .data-button {
+    background-color: #2980b9;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .data-button:hover {
+    background-color: #3498db;
+  }
+  
+  .error {
+    color: red;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .success {
+    color: green;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .data-list h3 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+  }
+  
+  .data-list ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .data-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ecf0f1;
+  }
+
+  .action-buttons {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .data-button.edit {
+    background-color: #27ae60;
+  }
+  
+  .data-button.delete {
+    background-color: #e74c3c;
+  }
+  
+  .data-button.cancel {
+    background-color: #95a5a6;
+  }
+  
+  .action-buttons {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .data-button.edit {
+    background-color: #27ae60;
+  }
+  
+  .data-button.delete {
+    background-color: #e74c3c;
+  }
+  
+  .data-button.cancel {
+    background-color: #95a5a6;
+  }
+
+  .action-buttons {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .data-button.edit {
+    background-color: #27ae60;
+  }
+  
+  .data-button.delete {
+    background-color: #e74c3c;
+  }
+  
+  .data-button.cancel {
+    background-color: #95a5a6;
+  }
