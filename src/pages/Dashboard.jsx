@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import api from '../api';
 import './Dashboard.css';
+import homeInsuranceImg from './images/home-insurance.jpeg';
+import carInsuranceImg from './images/car-insurance.jpeg';
+import lifeInsuranceImg from './images/life-insurance.jpeg';
+import termInsuranceImg from './images/term-insurance.jpeg';
+
 
 const flashCards = [
-  { id: 1, type: 'Home Insurance', icon: '🏠' },
-  { id: 2, type: 'Car Insurance', icon: '🚗' },
-  { id: 3, type: 'Life Insurance', icon: '❤️' },
-  { id: 4, type: 'Term Insurance', icon: '📜' },
+  { id: 1, type: 'Home Insurance', img: homeInsuranceImg },
+  { id: 2, type: 'Car Insurance', img: carInsuranceImg },
+  { id: 3, type: 'Life Insurance', img: lifeInsuranceImg },
+  { id: 4, type: 'Term Insurance', img: termInsuranceImg },
 ];
 
 const Dashboard = () => {
@@ -20,11 +25,21 @@ const Dashboard = () => {
   });
   const [flashMessage, setFlashMessage] = useState('');
 
-  // Function to generate a unique policy number
-  const generatePolicyNumber = () => {
+  // Helper function to determine the policy initial based on the policy type
+  const getPolicyInitial = (policyType) => {
+    if (policyType.toLowerCase().includes('car')) return 'CAR';
+    if (policyType.toLowerCase().includes('home')) return 'HOM';
+    if (policyType.toLowerCase().includes('life')) return 'LIF';
+    if (policyType.toLowerCase().includes('term')) return 'TER';
+    return 'GEN'; // Default initial if none match
+  };
+
+  // Generate a unique policy number with the policy initial included
+  const generatePolicyNumber = (policyType) => {
     const timestamp = Date.now();
     const randomNum = Math.floor(Math.random() * 1000);
-    return `POL-${timestamp}-${randomNum}`;
+    const initial = getPolicyInitial(policyType);
+    return `${initial}-POL-${timestamp}-${randomNum}`;
   };
 
   const handleCardClick = (card) => {
@@ -42,7 +57,7 @@ const Dashboard = () => {
       const payload = {
         ...formData,
         policyholderId: user.id, // Automatically assign the logged-in user's ID
-        policyNumber: generatePolicyNumber(), // Auto-generate the policy number
+        policyNumber: generatePolicyNumber(selectedPolicyType), // Auto-generate the policy number with initial
       };
       await api.post('/policies', payload);
       setFlashMessage('Policy applied successfully!');
@@ -60,15 +75,16 @@ const Dashboard = () => {
     <div className="dashboard-container">
       <h1>Welcome, {user ? user.name : 'User'}!</h1>
       <p>
-        This is your dashboard. Use the navigation bar to manage your claims, policies,
-        and, if you're an admin, policyholders.
+        This is your dashboard. Use the navigation bar to manage your claims, policies, and, if you're an admin, policyholders.
       </p>
-      
+
       <h2>Our Insurance Policies</h2>
       <div className="flash-card-grid">
         {flashCards.map((card) => (
           <div key={card.id} className="flash-card" onClick={() => handleCardClick(card)}>
-            <div className="card-icon">{card.icon}</div>
+            <div className="card-icon">
+              <img src={card.img} alt={card.type} />
+            </div>
             <h3>{card.type}</h3>
             <p>Click to apply</p>
           </div>

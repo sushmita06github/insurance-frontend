@@ -8,14 +8,16 @@ const Claims = () => {
   const [formData, setFormData] = useState({
     policyId: '',
     amount: '',
-    status: 'Pending'
+    status: 'Pending',
+    // Set the initial filing date to today's date in YYYY-MM-DD format
+    dateFiled: new Date().toISOString().substring(0, 10)
   });
   const [editingClaimId, setEditingClaimId] = useState(null);
   const [editClaimData, setEditClaimData] = useState({
     policyId: '',
     amount: '',
     status: 'Pending',
-    dateFiled: '' // New field for date filed
+    dateFiled: '' // For editing, this field will be populated accordingly
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -74,7 +76,12 @@ const Claims = () => {
     try {
       await api.post('/claims', formData);
       setSuccess('Claim filed successfully!');
-      setFormData({ policyId: '', amount: '', status: 'Pending' });
+      setFormData({
+        policyId: '',
+        amount: '',
+        status: 'Pending',
+        dateFiled: new Date().toISOString().substring(0, 10)
+      });
       fetchClaims();
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to file claim.');
@@ -157,6 +164,17 @@ const Claims = () => {
               <option value="Rejected">Rejected</option>
             </select>
           </div>
+          {/* Adding an editable date field for claim filing */}
+          <div className="form-group">
+            <label>Filing Date</label>
+            <input 
+              type="date" 
+              name="dateFiled" 
+              value={formData.dateFiled} 
+              onChange={handleChange} 
+              required 
+            />
+          </div>
           <button type="submit" className="data-button">File Claim</button>
         </form>
       )}
@@ -200,7 +218,7 @@ const Claims = () => {
                 </form>
               ) : (
                 <>
-                  <strong>ID:</strong> {claim._id} | <strong>Policy ID:</strong> {claim.policyId} | <strong>Amount:</strong> {claim.amount} | <strong>Status:</strong> {claim.status} | <strong>Date Filed:</strong> {new Date(claim.dateFiled).toLocaleDateString()}
+                  <strong>Policy ID:</strong> {claim.policyId} | <strong>Amount:</strong> {claim.amount} | <strong>Status:</strong> {claim.status} | <strong>Date Filed:</strong> {new Date(claim.dateFiled).toLocaleDateString()}
                   {user.role === 'admin' && (
                     <div className="action-buttons">
                       <button onClick={() => handleEditClick(claim)} className="data-button edit">Edit</button>
