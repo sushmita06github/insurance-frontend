@@ -57,10 +57,24 @@ const Register = () => {
             <option value="admin">Admin</option>
           </select>
         </div>
-        {formData.role === 'admin' && (
+        {/* {formData.role === 'admin' && (
           <div className="form-group">
             <label>Admin Secret</label>
             <input type="text" name="adminSecret" value={formData.adminSecret} onChange={handleChange} required />
+          </div>
+        )} */}
+        {formData.role === 'admin' && (
+          <div className="form-group">
+            <label>Admin Secret</label>
+            <input 
+              type="text" 
+              name="adminSecret" 
+              value={formData.adminSecret} 
+              onChange={handleChange} 
+              autoComplete="off" 
+              spellCheck="false" 
+              aria-autocomplete="none" 
+            />
           </div>
         )}
         <button type="submit" className="auth-button">Register</button>
