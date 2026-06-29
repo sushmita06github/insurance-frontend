@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+//import axios from 'axios';
+import api from '../api';
 import { useNavigate, Link } from 'react-router-dom';
 import './Auth.css';
 
@@ -22,7 +23,8 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3000/policyholders/register', formData);
+      //await axios.post('http://localhost:3000/policyholders/register', formData);
+      await api.post('/policyholders/register', formData);
       navigate('/login');
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');

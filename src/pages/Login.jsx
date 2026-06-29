@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+//import axios from 'axios';
+import api from '../api';
 import { useNavigate, Link } from 'react-router-dom';
 import './Auth.css';
 
@@ -12,7 +13,8 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/policyholders/login', { email, password });
+      //const response = await axios.post('http://localhost:3000/policyholders/login', { email, password });
+      const response = await api.post('/policyholders/login', { email, password });
       const { token, user } = response.data;
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
