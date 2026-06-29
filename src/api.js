@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000', // Adjust the port if needed
+  baseURL: 'https://claims-management-system-626r.onrender.com', // Adjust the port if needed
 });
 
 // Add token to every request if exists
